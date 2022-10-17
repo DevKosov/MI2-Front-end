@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<style type="text/css">
+			#vendeurs {
+				float : left ;
+				width : 30% ;
+			}
+			#produits {
+				float : left ;
+				background-color : #FFE568 ;
+				border : 1px solid violet ;
+			}
+			#produits tr td:first-child, tr td:last-child {
+				text-align : right ;
+			}
+			#services {
+				float : right ;
+				width : 20%;
+				border : 1px solid black ;
+				background-color : darkgrey ;
+				color : white ;
+				text-align : center ;
+			}
+			#contact {
+				clear : both ;
+			}
+		</style>
+	</head>
+	<body>
+		<section id="rapportAnnuel">
+			<section id="vendeurs">
+				<p>Après délibération, voici le classement des vendeurs du département pour ce semestre.</p>
+				<table id="lesMeilleursVendeurs">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Prénom</th>
+							<th>C.A. / semestre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="bestOf"><td>Durant</td><td>Marie</td><td>153.000</td></tr>
+						<tr class="bestOf"><td>Breuil</td><td>Alain</td><td>142.000</td></tr>
+						<tr class="bestOf"><td>Nguyen</td><td>Thi</td><td>131.600</td></tr>
+						<tr class="bestOf"><td>Sherman</td><td>Alan</td><td>123.050</td></tr>
+						<tr class="bestOf"><td>Candela</td><td>Stephane</td><td>101.001</td></tr>
+						<tr><td>Scanella</td><td>Vincenzo</td><td>77.900</td></tr>
+						<tr><td>Torelli</td><td>Ginette</td><td>51.920</td></tr>
+						<tr><td>Acunha</td><td>Lionel</td><td>43.550</td></tr>
+						<tr><td>Cagnion</td><td>Maximilien</td><td>40.000</td></tr>
+						<tr><td>Collomb</td><td>Audrey</td><td>30.600</td></tr>
+						<tr><td>Flore</td><td>Valentin</td><td>30.500</td></tr>
+						<tr class="worstOf"><td>Blanvillain</td><td>Crystel</td><td>19.200</td></tr>
+						<tr class="worstOf"><td>Cohen</td><td>Sidney</td><td>17.358</td></tr>
+						<tr class="worstOf"><td>Joly</td><td>Marie</td><td>10.450</td></tr>
+						<tr class="worstOf"><td>Challal</td><td>Aurélie</td><td>10.300</td></tr>
+						<tr class="worstOf"><td>Diaferia</td><td>Pierre-Antoine</td><td>150</td></tr>
+					</tbody>
+				</table>
+			</section>
+			<section id="produits">
+				<p>Le service commercial a calculé les chiffres d'affaire par produit.<br/>Voici les résultats.</p>
+				<table id="lesMeilleursProduits">
+					<thead>
+						<tr>
+							<th>Produit</th>
+							<th>C.A. / semestre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="bestOf"><td>Pack Happy Man - Bouchon & Tire-Bouchon</td><td>233.000</td></tr>
+						<tr class="bestOf"><td>Fourchette Télescopique</td><td>15.000</td></tr>
+						<tr class="bestOf"><td>Coque iPhone Space Invaders</td><td>13.000</td></tr>
+						<tr class="bestOf"><td>Décapsuleur Faucon Millenium Magnétique</td><td>12.900</td></tr>
+						<tr class="bestOf"><td>Balle Anti-Stress PacMan</td><td>11.630</td></tr>
+						<tr class="bestOf"><td>Papier Toilette 200 Euros</td><td>11.629</td></tr>
+						<tr class="bestOf"><td>Décapsuleur Space Invaders</td><td>11.628</td></tr>
+						<tr class="bestOf"><td>Moule à Glaçons Tetris</td><td>11.543</td></tr>
+						<tr class="bestOf"><td>Bol Costume Superman</td><td>10.254</td></tr>
+						<tr><td>Mug Mélangeur Paparazzi</td><td>9.450</td></tr>
+						<tr><td>Gel Douche Coeur</td><td>6.210</td></tr>
+						<tr><td>Couverture Polaire à Manches Batman</td><td>3.547</td></tr>
+						<tr class="worstOf"><td>Mug Thermos Zoom avec Capuchon</td><td>958</td></tr>
+						<tr class="worstOf"><td>Réveil projecteur Star Wars Darth Vader</td><td>251</td></tr>
+					</tbody>
+				</table>
+			</section>
+			<section id="services">
+				<p>Les coûts salariaux des services</p>
+				<table id="coutsSalariauxParService">
+					<thead>
+						<tr>
+							<th>Service</th>
+							<th>Coût / an</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr><td>Direction générale</td><td>1.233.000 €</td></tr>
+						<tr><td>Vente</td><td>$5,400,230</td></tr>
+						<tr><td>Administration</td><td>230.450 €</td></tr>
+						<tr><td>Production</td><td>1.655.321 €</td></tr>
+						<tr><td>Exp�dition</td><td>234.500 €</td></tr>
+						<tr><td>Entretien</td><td>3.629 €</td></tr>
+					</tbody>
+				</table>
+			</section>
+		</section>
+		<section id="contact">
+			<form action="enregistrerContact.php" method="POST">
+				<label for="name">Nom :</label><input type="text" name="name"/><br/>
+				<label for="mail">Mail :</label><input type="text" name="mail"/><br/>
+				<label for="tel">Tel :</label><input type="text" name="tel"/><br/>
+				<label for="objet">Objet :</label><input type="text" name="objet"/><br/>
+				<label for="message">Message :</label><textarea rows="5" cols="40" name="message"></textarea><br/>
+				<input type="submit" value="Envoyer"/>
+			</form>
+		</section>
+	</body>
+</html>

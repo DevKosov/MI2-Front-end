@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Contact</title>
+</head>
+<body>
+   <h1>Contact</h1>
+	<hr>
+	<nav>
+		<a href="index.html">Accueil</a>
+		<a href="perso.html">Espace perso</a>
+		<a href="destinations.html">Destinations</a>
+		<a href="audio.html">Voyages virtuel audio</a>
+		<a href="video.html">Voyages virtuel video</a>
+		<a href="contact.html">Contact</a>
+	</nav>
+	<hr>
+   <form method="post">
+   
+      <p><label for="nom">Nom</label></p>
+      <input id="nom" type="text" name="nom" required>
+
+      <p><label for="prenom">Prenom</label></p>
+      <input id="prenom" type="text" name="prenom">
+   
+      <p><label for="email">Email</label></p>
+      <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
+   
+      <p><label for="phonenumber">Numero de telehpone</label></p>
+      <input id="phonenumber" type="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="phonenumber" required> <small> Format : 07 07 07 07 07</small>
+
+      <p><label for="msg">Message</label></p>
+      <textarea id="msg" name="msg"></textarea>
+   
+      <input type="submit" value="Envoyer">
+
+   </form>
+</body>
+</html>
