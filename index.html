@@ -3,34 +3,47 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/style.css">
    <title>Agence de voyages</title>
 </head>
 <body>
-   <h1>Agence Lokomotiv</h1>
-   <hr>
-   <nav>
-      <a href="index.html">Accueil</a>
-      <a href="perso.html">Espace perso</a>
-      <a href="destinations.html">Destinations</a>
-      <a href="audio.html">Voyages virtuel audio</a>
-      <a href="video.html">Voyages virtuel video</a>
-      <a href="contact.html">Contact</a>
+   <nav id="navbar">
+      <img src="images/logo.svg" alt="logo">
+      
+      <div class="links">
+         <a class="ALeftToRight active" href="index.html"> Accueil <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="perso.html"> Espace perso <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="destinations.html"> Destinations <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="audio.html"> Voyages virtuel audio <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="video.html"> Voyages virtuel video <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="contact.html"> Contact <div class='absolute'><hr/></div></a>
+      </div>
    </nav>
-   <hr>
+   <div class="main flex flexColumn justify-content-center">
+      <div class="video">
+         <!--<div class="overlay"></div>-->
+         <video id="mainvid" src="video/trainFullQuality.mp4" type="video/mp4" loop></video>
+      </div>
+      <h1>Agence Lokomotive</h1>
+   </div>
    <section>
-      <h1>Description</h1>
-      <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia eligendi, dolor animi soluta quod ex omnis excepturi modi autem hic architecto neque placeat ipsa deserunt laborum, ab velit? Error, quasi!</blockquote>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus a pariatur voluptatum dolor accusantium commodi accusamus vel dicta, tempore officia?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dicta neque aspernatur recusandae sit tenetur quisquam, nobis voluptates, fugiat provident, repudiandae odio mollitia quam! Veniam, repellendus reprehenderit! Assumenda, enim sapiente?
-      Beatae omnis quas nostrum consectetur ratione voluptas. Eaque neque quae porro debitis? Explicabo, non deleniti temporibus accusamus quasi expedita provident ducimus dolores consectetur? Possimus mollitia dolorem voluptates, quibusdam quaerat expedita.
-      Sit quibusdam iure, reprehenderit explicabo delectus recusandae. Error sint atque neque, blanditiis quos mollitia rerum earum excepturi expedita, ullam iure ratione, esse nulla reiciendis laudantium quaerat. Eos esse perspiciatis dignissimos.
-      Exercitationem, eius enim! Eveniet aperiam maxime enim cupiditate atque delectus, magnam vitae? Exercitationem, asperiores corporis eaque officia maxime ducimus sed perferendis aut officiis cupiditate, nam nostrum eum animi, nesciunt quidem?
-      Ratione nesciunt quisquam placeat in. Labore totam fugiat quis maiores. Rem est hic iure! Odit ipsa nemo ipsum eligendi non tenetur aperiam laudantium nihil laborum, ut quas ullam dolorem voluptas.</p>
+      <div class="container">
+         <h1>Description</h1>
+         <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia eligendi, dolor animi soluta quod ex omnis excepturi modi autem hic architecto neque placeat ipsa deserunt laborum, ab velit? Error, quasi!</blockquote>
+         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus a pariatur voluptatum dolor accusantium commodi accusamus vel dicta, tempore officia?</p>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dicta neque aspernatur recusandae sit tenetur quisquam, nobis voluptates, fugiat provident, repudiandae odio mollitia quam! Veniam, repellendus reprehenderit! Assumenda, enim sapiente?
+         Beatae omnis quas nostrum consectetur ratione voluptas. Eaque neque quae porro debitis? Explicabo, non deleniti temporibus accusamus quasi expedita provident ducimus dolores consectetur? Possimus mollitia dolorem voluptates, quibusdam quaerat expedita.
+         Sit quibusdam iure, reprehenderit explicabo delectus recusandae. Error sint atque neque, blanditiis quos mollitia rerum earum excepturi expedita, ullam iure ratione, esse nulla reiciendis laudantium quaerat. Eos esse perspiciatis dignissimos.
+         Exercitationem, eius enim! Eveniet aperiam maxime enim cupiditate atque delectus, magnam vitae? Exercitationem, asperiores corporis eaque officia maxime ducimus sed perferendis aut officiis cupiditate, nam nostrum eum animi, nesciunt quidem?
+         Ratione nesciunt quisquam placeat in. Labore totam fugiat quis maiores. Rem est hic iure! Odit ipsa nemo ipsum eligendi non tenetur aperiam laudantium nihil laborum, ut quas ullam dolorem voluptas.</p>
+      </div>
    </section>
-   <hr>
    <section>
+      <div class="container">
       <h1>Infos pratiques</h1>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus assumenda velit reiciendis veniam saepe soluta quo voluptatum sunt distinctio facere quis natus ratione exercitationem ex cum voluptates eveniet nisi!</p>
+      </div>
    </section>
 </body>
+<script src="script/script.js"></script>
 </html>

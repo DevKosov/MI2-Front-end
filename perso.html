@@ -3,31 +3,36 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/style.css">
    <title>Perso</title>
 </head>
 <body>
-   <h1>Informations perso</h1>
-   <hr>
-   <nav>
-      <a href="index.html">Accueil</a>
-      <a href="perso.html">Espace perso</a>
-      <a href="destinations.html">Destinations</a>
-      <a href="audio.html">Voyages virtuel audio</a>
-      <a href="video.html">Voyages virtuel video</a>
-      <a href="contact.html">Contact</a>
+   <nav id="navbar">
+      <img src="images/logo.svg" alt="logo">
+      
+      <div class="links">
+         <a class="ALeftToRight" href="index.html"> Accueil <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight active" href="perso.html"> Espace perso <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="destinations.html"> Destinations <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="audio.html"> Voyages virtuel audio <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="video.html"> Voyages virtuel video <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="contact.html"> Contact <div class='absolute'><hr/></div></a>
+      </div>
    </nav>
-   <hr>
-   <ul>
-      <li>Connection</li>
-      <li>Mes informations
-         <ol>
-            <li>Nom et prenom</li>
-            <li>Numero de telephone</li>
-            <li>Email</li>
-         </ol>
-      </li>
-      <li>Messagerie</li>
-      <li>Historique</li>
-   </ul>
+   <section>
+      <h1>Informations perso</h1>
+      <ul>
+         <li>Connection</li>
+         <li>Mes informations
+            <ol>
+               <li>Nom et prenom</li>
+               <li>Numero de telephone</li>
+               <li>Email</li>
+            </ol>
+         </li>
+         <li>Messagerie</li>
+         <li>Historique</li>
+      </ul>
+   </section>
 </body>
 </html>

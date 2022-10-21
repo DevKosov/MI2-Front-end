@@ -3,38 +3,44 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/style.css">
 	<title>Voyages virtuel audio</title>
 </head>
 <body>
-	<h1>Voyages virtuel audio</h1>
-	<hr>
-	<nav>
-		<a href="index.html">Accueil</a>
-		<a href="perso.html">Espace perso</a>
-		<a href="destinations.html">Destinations</a>
-		<a href="audio.html">Voyages virtuel audio</a>
-		<a href="video.html">Voyages virtuel video</a>
-		<a href="contact.html">Contact</a>
-	</nav>
-	<hr>
-	<div>
-		<h2>Voyage 1</h2>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
-		<audio src="./airplane.mp3" controls></audio>
-	</div>
-	<div>
-		<h2>Voyage 2</h2>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
-		<a href="./airplane.mp3">
-			Download audio
-		</a>
-	</div>
-	<div>
-		<h2>Voyage 3</h2>
-		<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur ratione illo dicta? Minima commodi quae quam odio fugiat aliquid numquam, aperiam cumque, iste ex corrupti recusandae ducimus, adipisci ut laboriosam.</p>
-		<a href="./airplane.mp3">
-			Download audio
-		</a>
-	</div>
+	<nav id="navbar">
+      <img src="images/logo.svg" alt="logo">
+      
+      <div class="links">
+         <a class="ALeftToRight" href="index.html"> Accueil <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="perso.html"> Espace perso <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="destinations.html"> Destinations <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight active" href="audio.html"> Voyages virtuel audio <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="video.html"> Voyages virtuel video <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="contact.html"> Contact <div class='absolute'><hr/></div></a>
+      </div>
+   </nav>
+	<section>
+		<h1>Voyages virtuel audio</h1>
+		<div>
+			<h2>Voyage 1</h2>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
+			<audio src="./airplane.mp3" controls></audio>
+		</div>
+		<div>
+			<h2>Voyage 2</h2>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
+			<a href="./airplane.mp3">
+				Download audio
+			</a>
+		</div>
+		<div>
+			<h2>Voyage 3</h2>
+			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur ratione illo dicta? Minima commodi quae quam odio fugiat aliquid numquam, aperiam cumque, iste ex corrupti recusandae ducimus, adipisci ut laboriosam.</p>
+			<a href="./airplane.mp3">
+				Download audio
+			</a>
+		</div>
+
+	</section>
 </body>
 </html>

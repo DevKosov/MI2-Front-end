@@ -3,62 +3,98 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/style.css">
    <title>Destinations</title>
 </head>
 <body>
-   <h1>Destinations</h1>
-   <hr>
-   <nav>
-      <a href="index.html">Accueil</a>
-      <a href="perso.html">Espace perso</a>
-      <a href="destinations.html">Destinations</a>
-      <a href="audio.html">Voyages virtuel audio</a>
-      <a href="video.html">Voyages virtuel video</a>
-      <a href="contact.html">Contact</a>
+   <nav id="navbar" class="scrolling">
+      <img src="images/logo.svg" alt="logo">
+      
+      <div class="links flex align-items-center">
+         <a class="ALeftToRight" href="index.html"> Accueil <div class='absolute'><hr/></div></a>
+         <div class="relative">
+            <a class="ALeftToRight" href="perso.html"> Espace perso
+               <div class='absolute'><hr/></div>
+            </a>
+            <div class="dropdown-menu flex flexColumn"> 
+               <a class="ALeftToRight dropdown-link" href="index.html"> <span>Connection</span> <div class='absolute'><hr/></div></a>
+               <a class="ALeftToRight dropdown-link" href="index.html"> <span>Mes Infos</span> <div class='absolute'><hr/></div></a>
+               <a class="ALeftToRight dropdown-link" href="index.html"> <span>Messagerie</span> <div class='absolute'><hr/></div></a>
+               <a class="ALeftToRight dropdown-link" href="index.html"> <span>Historique</span> <div class='absolute'><hr/></div></a>
+            </div>
+         </div>
+         <a class="ALeftToRight active" href="destinations.html"> Destinations <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="audio.html"> Voyages virtuel audio <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="video.html"> Voyages virtuel video <div class='absolute'><hr/></div></a>
+         <a class="ALeftToRight" href="contact.html"> Contact <div class='absolute'><hr/></div></a>
+      </div>
    </nav>
-   <hr>
-   <table>
-      <thead>
-         <th>Photo</th>
-         <th>Pays</th>
-         <th>Cicruit</th>
-         <th>Tarif</th>
-         <th>Reserver</th>
-      </thead>
-      <tbody>
-         <tr>
-            <td><img src="kosovo.jpg" style="width:200px;" alt="kosovo"></td>
-            <td>Kosovo</td>
-            <td>Prizeren</td>
-            <td>1000 $</td>
-            <td><button>Reserver</button></td>
-            <td><a href="#">Debut</a></td>
-         </tr>
-         <tr>
-            <td><img src="kosovo.jpg" style="width:200px;" alt="kosovo"></td>
-            <td>Kosovo</td>
-            <td>Prizeren</td>
-            <td>1000 $</td>
-            <td><button>Reserver</button></td>
-            <td><a href="#">Debut</a></td>
-         </tr>
-         <tr>
-            <td><img src="kosovo.jpg" style="width:200px;" alt="kosovo"></td>
-            <td>Kosovo</td>
-            <td>Prizeren</td>
-            <td>1000 $</td>
-            <td><button>Reserver</button></td>
-            <td><a href="#">Debut</a></td>
-         </tr>
-         <tr>
-            <td><img src="kosovo.jpg" style="width:200px;" alt="kosovo"></td>
-            <td>Kosovo</td>
-            <td>Prizeren</td>
-            <td>1000 $</td>
-            <td><button>Reserver</button></td>
-            <td><a href="#">Debut</a></td>
-         </tr>
-      </tbody>
-   </table>
+   <section>
+      <div class="container">
+      <h1>Destinations</h1>
+         <table>
+            <thead>
+               <tr>
+                  <th>Photo</th>
+                  <th>Pays</th>
+                  <th>Circuit</th>
+                  <th>Tarif</th>
+                  <th>Reserver</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td><img src="images/albania.jpg" alt="Berati"></td>
+                  <td class="pays">Kosovo</td>
+                  <td class="circuit">Circuits de 8 jours / 7 nuits au départ de Paris le 17 avr. 2023</td>
+                  <td class="tarif">12 000 $</td>
+                  <td class="reserver">
+                     <button class="ALeftToRight "> 
+                        Reserver 
+                        <div class='absolute'><hr/></div>
+                     </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td><img src="images/albania.jpg" alt="Berati"></td>
+                  <td class="pays">Albania</td>
+                  <td class="circuit">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis facere quaerat maxime eveniet quidem esse obcaecati facilis quasi officia odio?</td>
+                  <td class="tarif">1 000 $</td>
+                  <td class="reserver">
+                     <button class="ALeftToRight "> 
+                        Reserver 
+                        <div class='absolute'><hr/></div>
+                     </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td><img src="images/albania.jpg" alt="Berati"></td>
+                  <td class="pays">France</td>
+                  <td class="circuit">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad facilis aspernatur corporis earum minima a.</td>
+                  <td class="tarif">1 000 $</td>
+                  <td class="reserver">
+                     <button class="ALeftToRight "> 
+                        Reserver 
+                        <div class='absolute'><hr/></div>
+                     </button>
+                  </td>
+               </tr>
+               <tr>
+                  <td><img src="images/albania.jpg" alt="Berati"></td>
+                  <td class="pays">Italy</td>
+                  <td class="circuit">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione hic architecto eius et quisquam, quis voluptate impedit minus repudiandae fuga tempore nulla animi unde sunt!</td>
+                  <td class="tarif">1 000 $</td>
+                  <td class="reserver">
+                     <button class="ALeftToRight "> 
+                        Reserver 
+                        <div class='absolute'><hr/></div>
+                     </button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </section>
 </body>
+<script src="script/script.js"></script>
 </html>
