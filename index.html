@@ -1,49 +1,238 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="css/style.css">
-   <title>Agence de voyages</title>
-</head>
-<body>
-   <nav id="navbar">
-      <img src="images/logo.svg" alt="logo">
-      
-      <div class="links">
-         <a class="ALeftToRight active" href="index.html"> Accueil <div class='absolute'><hr/></div></a>
-         <a class="ALeftToRight" href="perso.html"> Espace perso <div class='absolute'><hr/></div></a>
-         <a class="ALeftToRight" href="destinations.html"> Destinations <div class='absolute'><hr/></div></a>
-         <a class="ALeftToRight" href="audio.html"> Voyages virtuel audio <div class='absolute'><hr/></div></a>
-         <a class="ALeftToRight" href="video.html"> Voyages virtuel video <div class='absolute'><hr/></div></a>
-         <a class="ALeftToRight" href="contact.html"> Contact <div class='absolute'><hr/></div></a>
-      </div>
-   </nav>
-   <div class="main flex flexColumn justify-content-center">
-      <div class="video">
-         <!--<div class="overlay"></div>-->
-         <video id="mainvid" src="video/trainFullQuality.mp4" type="video/mp4" loop></video>
-      </div>
-      <h1>Agence Lokomotive</h1>
-   </div>
-   <section>
-      <div class="container">
-         <h1>Description</h1>
-         <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia eligendi, dolor animi soluta quod ex omnis excepturi modi autem hic architecto neque placeat ipsa deserunt laborum, ab velit? Error, quasi!</blockquote>
-         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus a pariatur voluptatum dolor accusantium commodi accusamus vel dicta, tempore officia?</p>
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dicta neque aspernatur recusandae sit tenetur quisquam, nobis voluptates, fugiat provident, repudiandae odio mollitia quam! Veniam, repellendus reprehenderit! Assumenda, enim sapiente?
-         Beatae omnis quas nostrum consectetur ratione voluptas. Eaque neque quae porro debitis? Explicabo, non deleniti temporibus accusamus quasi expedita provident ducimus dolores consectetur? Possimus mollitia dolorem voluptates, quibusdam quaerat expedita.
-         Sit quibusdam iure, reprehenderit explicabo delectus recusandae. Error sint atque neque, blanditiis quos mollitia rerum earum excepturi expedita, ullam iure ratione, esse nulla reiciendis laudantium quaerat. Eos esse perspiciatis dignissimos.
-         Exercitationem, eius enim! Eveniet aperiam maxime enim cupiditate atque delectus, magnam vitae? Exercitationem, asperiores corporis eaque officia maxime ducimus sed perferendis aut officiis cupiditate, nam nostrum eum animi, nesciunt quidem?
-         Ratione nesciunt quisquam placeat in. Labore totam fugiat quis maiores. Rem est hic iure! Odit ipsa nemo ipsum eligendi non tenetur aperiam laudantium nihil laborum, ut quas ullam dolorem voluptas.</p>
-      </div>
-   </section>
-   <section>
-      <div class="container">
-      <h1>Infos pratiques</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus assumenda velit reiciendis veniam saepe soluta quo voluptatum sunt distinctio facere quis natus ratione exercitationem ex cum voluptates eveniet nisi!</p>
-      </div>
-   </section>
-</body>
-<script src="script/script.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <title>Agence de voyages</title>
+    </head>
+    <body>
+
+        <!-- SECTION NAVBAR -->
+        <nav id="navbar">
+            <img src="images/logo.svg" alt="logo" />
+
+            <div class="links flex align-items-center" id="navbar-links">
+                <a class="ALeftToRight active" href="#" data-section="accueil">
+                    Accueil
+                    <div class="absolute"><hr /></div>
+                </a>
+                <div class="relative">
+                    <a class="ALeftToRight" href="#" data-section="informations">
+                        Espace perso
+                        <div class="absolute"><hr /></div>
+                    </a>
+                    <div class="dropdown-menu flex flexColumn">
+                        <a class="ALeftToRight dropdown-link" href="index.html">
+                            <span>Connection</span>
+                            <div class="absolute"><hr /></div>
+                        </a>
+                        <a class="ALeftToRight dropdown-link" href="index.html">
+                            <span>Mes Infos</span>
+                            <div class="absolute"><hr /></div>
+                        </a>
+                        <a class="ALeftToRight dropdown-link" href="index.html">
+                            <span>Messagerie</span>
+                            <div class="absolute"><hr /></div>
+                        </a>
+                        <a class="ALeftToRight dropdown-link" href="index.html">
+                            <span>Historique</span>
+                            <div class="absolute"><hr /></div>
+                        </a>
+                    </div>
+                </div>
+                <a class="ALeftToRight" href="#" data-section="destinations">
+                    Destinations
+                    <div class="absolute"><hr /></div>
+                </a>
+                <a class="ALeftToRight" href="#" data-section="audio">
+                    Voyages virtuel audio
+                    <div class="absolute"><hr /></div>
+                </a>
+                <a class="ALeftToRight" href="#" data-section="video">
+                    Voyages virtuel video
+                    <div class="absolute"><hr /></div>
+                </a>
+                <a class="ALeftToRight" href="#" data-section="contact">
+                    Contact
+                    <div class="absolute"><hr /></div>
+                </a>
+            </div>
+        </nav>
+        <!-- !SECTION -->
+
+
+        <!-- SECTION ACCUEIL -->
+        <section id="accueil" class="active">
+            <div class="main flex flexColumn justify-content-center">
+                <div class="video">
+                    <!--<div class="overlay"></div> src="video/trainFullQualityw.mp4" -->
+                    <video id="mainvid" src="https://res.cloudinary.com/devkosov/video/upload/v1667996431/trainFullQuality_fxrzbg.mp4" type="video/mp4" loop></video>
+                </div>
+                <h1>Agence Lokomotive</h1>
+            </div>
+            <section>
+                <div class="container">
+                    <h1>Description</h1>
+                    <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia eligendi, dolor animi soluta quod ex omnis excepturi modi autem hic architecto neque placeat ipsa deserunt laborum, ab velit? Error, quasi!</blockquote>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus a pariatur voluptatum dolor accusantium commodi accusamus vel dicta, tempore officia?</p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dicta neque aspernatur recusandae sit tenetur quisquam, nobis voluptates, fugiat provident, repudiandae odio mollitia quam! Veniam, repellendus reprehenderit! Assumenda, enim sapiente? Beatae omnis quas nostrum consectetur ratione voluptas. Eaque neque quae porro
+                        debitis? Explicabo, non deleniti temporibus accusamus quasi expedita provident ducimus dolores consectetur? Possimus mollitia dolorem voluptates, quibusdam quaerat expedita. Sit quibusdam iure, reprehenderit explicabo delectus recusandae. Error sint atque neque, blanditiis quos mollitia rerum earum excepturi expedita, ullam iure
+                        ratione, esse nulla reiciendis laudantium quaerat. Eos esse perspiciatis dignissimos. Exercitationem, eius enim! Eveniet aperiam maxime enim cupiditate atque delectus, magnam vitae? Exercitationem, asperiores corporis eaque officia maxime ducimus sed perferendis aut officiis cupiditate, nam nostrum eum animi, nesciunt quidem? Ratione
+                        nesciunt quisquam placeat in. Labore totam fugiat quis maiores. Rem est hic iure! Odit ipsa nemo ipsum eligendi non tenetur aperiam laudantium nihil laborum, ut quas ullam dolorem voluptas.
+                    </p>
+                </div>
+            </section>
+            <section>
+                <div class="container">
+                    <h1>Infos pratiques</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, temporibus assumenda velit reiciendis veniam saepe soluta quo voluptatum sunt distinctio facere quis natus ratione exercitationem ex cum voluptates eveniet nisi!</p>
+                </div>
+            </section>
+        </section>
+        <!-- !SECTION -->
+
+
+        <!-- SECTION INFORMATIONS -->
+        <section id="informations" class="hidden">
+            <h1>Informations perso</h1>
+            <ul>
+                <li>Connection</li>
+                <li>
+                    Mes informations
+                    <ol>
+                        <li>Nom et prenom</li>
+                        <li>Numero de telephone</li>
+                        <li>Email</li>
+                    </ol>
+                </li>
+                <li>Messagerie</li>
+                <li>Historique</li>
+            </ul>
+        </section>
+        <!-- !SECTION -->
+
+
+        <!-- SECTION DESTINATIONS -->
+        <section id="destinations" class="hidden">
+            <div class="container" >
+                <h1>Destinations <span class="showDestinationFromButton" onclick="destinationFormState(0,'add')"><img src="images/add.svg" alt="add"></span></h1>
+                
+                <!-- NOTE DESTINATION FORM -->
+                <form id="destinationForm" class="flexColumn hidden">
+                    <h3>Ajouter une destination</h3>
+
+                    <input class="hidden" type="text" id="idDest" name="idDest">
+
+                    <div class="flexColumn">
+                        <img id="imagePreviewDest"></img>
+                        <br/>
+                        <label for="imageDest">Image :<label>
+                        <input type="file" id="imageDest" name="imageDest">
+                        <br/>
+                    </div>
+                    <div class="flex">
+                        <label for="paysDest">pays :<label>
+                        <input type="text" id="paysDest" name="paysDest" required>
+                        <br/>
+                    </div>
+                    <div class="flex">
+                        <label for="tarifDest">Tarif :</label>
+                        <input type="number" id="tarifDest" name="tarifDest" required>
+                        <br/>
+                    </div>
+                    <div class="flex">
+                        <label for="circuitDest">Circuit :</label>
+                        <textarea placehoder="Expliquer le circuit" type="text" id="circuitDest" name="circuitDest" required></textarea>
+                    </div>
+                    <button type="submit" class="ALeftToRight" onclick=()>Submit</button>
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Pays</th>
+                            <th>Circuit</th>
+                            <th>Tarif</th>
+                            <th>Reserver</th>
+                        </tr>
+                    </thead>
+                    <tbody id="destinationsTable">
+                        <!-- GENERATED WITH JAVASCRIPT -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- !SECTION -->
+
+
+        <!-- SECTION AUDIO -->
+        <section id="audio" class="hidden">
+            <h1>Voyages virtuel audio</h1>
+            <div>
+                <h2>Voyage 1</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
+                <audio src="./airplane.mp3" controls></audio>
+            </div>
+            <div>
+                <h2>Voyage 2</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
+                <a href="./airplane.mp3">Download audio</a>
+            </div>
+            <div>
+                <h2>Voyage 3</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur ratione illo dicta? Minima commodi quae quam odio fugiat aliquid numquam, aperiam cumque, iste ex corrupti recusandae ducimus, adipisci ut laboriosam.</p>
+                <a href="./airplane.mp3">Download audio</a>
+            </div>
+        </section>
+        <!-- !SECTION -->
+
+
+        <!-- SECTION VIDEO -->
+        <section id="video" class="hidden">
+            <h1>Voyages virtuel video</h1>
+            <div>
+                <h2>Turkey</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse error officiis tempora cum, suscipit non odit maiores modi sit amet aut illum dignissimos commodi possimus! Vero magni quisquam cum!</p>
+                <video src="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4" style="max-width: 100%" controls></video>
+            </div>
+            <div>
+                <h2>Kosovo</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, numquam tenetur enim officiis molestiae id temporibus ipsam culpa, quasi nulla quos quidem eaque, consequuntur debitis iste cupiditate consequatur deserunt aliquam?</p>
+                <a href="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4">Lien vers la video</a>
+            </div>
+        </section>
+        <!-- !SECTION -->
+
+
+        <!-- SECTION CONTACT-->
+        <section id="contact" class="hidden">
+            <h1>Contact</h1>
+            <form method="post">
+                <p><label for="nom">Nom</label></p>
+                <input id="nom" type="text" name="nom" required />
+
+                <p><label for="prenom">Prenom</label></p>
+                <input id="prenom" type="text" name="prenom" />
+
+                <p><label for="email">Email</label></p>
+                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+
+                <p><label for="phonenumber">Numero de telehpone</label></p>
+                <input id="phonenumber" type="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="phonenumber" required />
+                <small>Format : 07 07 07 07 07</small>
+
+                <p><label for="msg">Message</label></p>
+                <textarea id="msg" name="msg"></textarea>
+
+                <input type="submit" value="Envoyer" />
+            </form>
+        </section>
+    </body>
+    <script src="script/Destination.js"></script>
+    <script src="script/script.js"></script>
 </html>
