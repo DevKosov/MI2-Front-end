@@ -4,16 +4,22 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/style.css" />
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="css/style.css" />
+
         <title>Agence de voyages</title>
     </head>
     <body>
+    
 
         <!-- SECTION NAVBAR -->
-        <nav id="navbar">
-            <img src="images/logo.svg" alt="logo" />
-
+        <nav id="navbar" class="nav">
+            <div class="imgcontainer">
+                <img src="images/logo.svg" alt="logo" />
+            </div>
             <div class="links flex align-items-center" id="navbar-links">
                 <a class="ALeftToRight active" href="#" data-section="accueil">
                     Accueil
@@ -24,20 +30,20 @@
                         Espace perso
                         <div class="absolute"><hr /></div>
                     </a>
-                    <div class="dropdown-menu flex flexColumn">
-                        <a class="ALeftToRight dropdown-link" href="index.html">
+                    <div class="dropdown-menu-me flex flexColumn">
+                        <a class="ALeftToRight dropdown-link" href="#" data-bs-toggle="modal" data-bs-target="#LoginModal">
                             <span>Connection</span>
                             <div class="absolute"><hr /></div>
                         </a>
-                        <a class="ALeftToRight dropdown-link" href="index.html">
+                        <a class="ALeftToRight dropdown-link" href="#">
                             <span>Mes Infos</span>
                             <div class="absolute"><hr /></div>
                         </a>
-                        <a class="ALeftToRight dropdown-link" href="index.html">
+                        <a class="ALeftToRight dropdown-link" href="#">
                             <span>Messagerie</span>
                             <div class="absolute"><hr /></div>
                         </a>
-                        <a class="ALeftToRight dropdown-link" href="index.html">
+                        <a class="ALeftToRight dropdown-link" href="#">
                             <span>Historique</span>
                             <div class="absolute"><hr /></div>
                         </a>
@@ -55,23 +61,38 @@
                     Voyages virtuel video
                     <div class="absolute"><hr /></div>
                 </a>
-                <a class="ALeftToRight" href="#" data-section="contact">
+                <a class="ALeftToRight" href="#" data-section="contact" data-bs-toggle="modal" data-bs-target="#ContactUsModal">
                     Contact
                     <div class="absolute"><hr /></div>
                 </a>
+
+                <a class="hamburger-menu">
+                    <input class="trigger hidden" id="hamburger" type="checkbox" onclick="displayResponsiveMenu()"/>
+                    <label class="burger-content" for="hamburger">
+                        <div class="hamburger"></div>
+                    </label>
+                </a>
+
             </div>
         </nav>
-        <!-- !SECTION -->
 
+        <div id="mobileNavbar" class="navbar-links-responsive hidden">
+            <div id="mobileNavbarLinks" class="links-resp flex flexColumn justify-content-center align-items-center">
+            
+            </div>
+        </div>
+
+        <!-- !SECTION -->
 
         <!-- SECTION ACCUEIL -->
         <section id="accueil" class="active">
             <div class="main flex flexColumn justify-content-center">
                 <div class="video">
-                    <!--<div class="overlay"></div> src="video/trainFullQualityw.mp4" -->
-                    <video id="mainvid" src="https://res.cloudinary.com/devkosov/video/upload/v1667996431/trainFullQuality_fxrzbg.mp4" type="video/mp4" loop></video>
+                    <video id="mainvid" src="https://res.cloudinary.com/devkosov/video/upload/v1668639667/Pexels_Videos_2533765_online-video-cutter.com_pyb5vb.mp4" type="video/mp4" loop></video>
                 </div>
-                <h1>Agence Lokomotive</h1>
+                <div>
+                    <h1><span>Agence</span> <br> <span>Lokomotive</span></h1>
+                </div>
             </div>
             <section>
                 <div class="container">
@@ -97,7 +118,7 @@
 
 
         <!-- SECTION INFORMATIONS -->
-        <section id="informations" class="hidden">
+        <section id="informations" class="hidden container">
             <h1>Informations perso</h1>
             <ul>
                 <li>Connection</li>
@@ -119,120 +140,319 @@
         <!-- SECTION DESTINATIONS -->
         <section id="destinations" class="hidden">
             <div class="container" >
-                <h1>Destinations <span class="showDestinationFromButton" onclick="destinationFormState(0,'add')"><img src="images/add.svg" alt="add"></span></h1>
-                
-                <!-- NOTE DESTINATION FORM -->
-                <form id="destinationForm" class="flexColumn hidden">
-                    <h3>Ajouter une destination</h3>
+                <h1>Destinations <span id="addImage" class="showDestinationFromButton hidden" data-bs-toggle="modal" data-bs-target="#destinationFormModal"  onclick="destinationFormState(0,'add')"><img src="images/add.svg" alt="add"></span></h1>
 
-                    <input class="hidden" type="text" id="idDest" name="idDest">
-
-                    <div class="flexColumn">
-                        <img id="imagePreviewDest"></img>
-                        <br/>
-                        <label for="imageDest">Image :<label>
-                        <input type="file" id="imageDest" name="imageDest">
-                        <br/>
+                <div class="container">
+                    <div class="row" id="destinationsTable">
+                    
                     </div>
-                    <div class="flex">
-                        <label for="paysDest">pays :<label>
-                        <input type="text" id="paysDest" name="paysDest" required>
-                        <br/>
-                    </div>
-                    <div class="flex">
-                        <label for="tarifDest">Tarif :</label>
-                        <input type="number" id="tarifDest" name="tarifDest" required>
-                        <br/>
-                    </div>
-                    <div class="flex">
-                        <label for="circuitDest">Circuit :</label>
-                        <textarea placehoder="Expliquer le circuit" type="text" id="circuitDest" name="circuitDest" required></textarea>
-                    </div>
-                    <button type="submit" class="ALeftToRight" onclick=()>Submit</button>
-                </form>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Photo</th>
-                            <th>Pays</th>
-                            <th>Circuit</th>
-                            <th>Tarif</th>
-                            <th>Reserver</th>
-                        </tr>
-                    </thead>
-                    <tbody id="destinationsTable">
-                        <!-- GENERATED WITH JAVASCRIPT -->
-                    </tbody>
-                </table>
+                </div>
             </div>
         </section>
         <!-- !SECTION -->
 
 
         <!-- SECTION AUDIO -->
-        <section id="audio" class="hidden">
+        <section id="audio" class="hidden container">
             <h1>Voyages virtuel audio</h1>
-            <div>
-                <h2>Voyage 1</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
-                <audio src="./airplane.mp3" controls></audio>
+            <div class="container">
+                <div class="row">
+                    <div class="audio-parent col-lg-4 col-md-6 col-sm-12 col-xs-12 no-padding">
+                        <div class="card flex flexColumn justify-content-space-between">
+                            <div class="card-header">
+                                <h3>Voyage 1</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!
+                                </p>
+                            </div>
+                            <audio src="https://res.cloudinary.com/devkosov/video/upload/v1668459236/mixkit-old-train-departure-1628_sr3g1c.wav" controls></audio>
+                        </div>
+                    </div>
+                    <div class="audio-parent col-lg-4 col-md-6 col-sm-12 col-xs-12 no-padding">
+                        <div class="card flex flexColumn justify-content-space-between">
+                            <div class="card-header">
+                                <h3>Voyage 2</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!
+                                </p>
+                                <div class="flex justify-content-flex-end">
+                                    <a href="https://res.cloudinary.com/devkosov/video/upload/v1668459236/mixkit-old-train-departure-1628_sr3g1c.wav">
+                                        <button class="ALeftToRight">Download audio
+                                            <div class="absolute">
+                                                <hr>
+                                            </div>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="audio-parent col-lg-4 col-md-6 col-sm-12 col-xs-12 no-padding">
+                        <div class="card flex flexColumn justify-content-space-between">
+                            <div class="card-header">
+                                <h3>Voyage 3</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!
+                                </p>
+                                <div class="flex justify-content-flex-end">
+                                    <a href="https://res.cloudinary.com/devkosov/video/upload/v1668459236/mixkit-old-train-departure-1628_sr3g1c.wav">
+                                        <button class="ALeftToRight">Download audio
+                                            <div class="absolute">
+                                                <hr>
+                                            </div>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h2>Voyage 2</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ullam provident, praesentium quia nemo voluptatum. Pariatur enim ab odit doloribus praesentium, iusto explicabo eligendi aspernatur libero, vitae laboriosam ipsum atque!</p>
-                <a href="./airplane.mp3">Download audio</a>
-            </div>
-            <div>
-                <h2>Voyage 3</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur ratione illo dicta? Minima commodi quae quam odio fugiat aliquid numquam, aperiam cumque, iste ex corrupti recusandae ducimus, adipisci ut laboriosam.</p>
-                <a href="./airplane.mp3">Download audio</a>
-            </div>
+
         </section>
         <!-- !SECTION -->
 
 
         <!-- SECTION VIDEO -->
-        <section id="video" class="hidden">
+        <section id="video" class="hidden container">
             <h1>Voyages virtuel video</h1>
-            <div>
-                <h2>Turkey</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse error officiis tempora cum, suscipit non odit maiores modi sit amet aut illum dignissimos commodi possimus! Vero magni quisquam cum!</p>
-                <video src="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4" style="max-width: 100%" controls></video>
-            </div>
-            <div>
-                <h2>Kosovo</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, numquam tenetur enim officiis molestiae id temporibus ipsam culpa, quasi nulla quos quidem eaque, consequuntur debitis iste cupiditate consequatur deserunt aliquam?</p>
-                <a href="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4">Lien vers la video</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="card video-card">
+                            <video src="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4" style="max-width: 100%"
+                                controls>
+                            </video>
+                            <div class="card-header">
+                                <h2>Kosovo</h2>
+                            </div>
+                            <div class="card-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse error officiis tempora cum, suscipit non odit
+                                    maiores modi sit amet aut illum dignissimos commodi possimus! Vero magni quisquam cum!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <h2>Autre videos </h2>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Kosovo</h3>
+                                </div>
+                                <div class="card-content flex flexColumn">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, numquam tenetur enim officiis molestiae id
+                                        temporibus ipsam culpa, quasi nulla quos quidem eaque, consequuntur debitis iste cupiditate consequatur deserunt
+                                        aliquam?</p>
+                                    <div class="flex justify-content-flex-end">
+                                        <a href="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4">
+                                            <button class="ALeftToRight">Download video
+                                                <div class="absolute">
+                                                    <hr>
+                                                </div>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 margin-top-20px">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Kosovo</h3>
+                                </div>
+                                <div class="card-content flex flexColumn">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, numquam tenetur enim officiis molestiae id
+                                        temporibus ipsam culpa, quasi nulla quos quidem eaque, consequuntur debitis iste cupiditate consequatur deserunt
+                                        aliquam?</p>
+                                    <div class="flex justify-content-flex-end">
+                                        <a href="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4">
+                                            <button class="ALeftToRight">Download video
+                                                <div class="absolute">
+                                                    <hr>
+                                                </div>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 margin-top-20px">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3>Kosovo</h3>
+                                </div>
+                                <div class="card-content flex flexColumn">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, numquam tenetur enim officiis molestiae id
+                                        temporibus ipsam culpa, quasi nulla quos quidem eaque, consequuntur debitis iste cupiditate consequatur deserunt
+                                        aliquam?</p>
+                                    <div class="flex justify-content-flex-end">
+                                        <a href="https://res.cloudinary.com/devkosov/video/upload/v1667996511/video_ed5rcw.mp4">
+                                            <button class="ALeftToRight">Download video
+                                                <div class="absolute">
+                                                    <hr>
+                                                </div>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- !SECTION -->
+        <!-- Modal -->
+        <div class="modal modal-centered modal-scrollable fade" id="destinationFormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalFormTitle">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- NOTE DESTINATION FORM -->
+                        <form id="destinationForm">
+                            
+                            <input class="hidden" type="text" id="idDest" name="idDest">
+                            <div id="imagePreviewDest" class="destination-image"></div>
 
+                            <div class="form-group">
+                                <label class="form-label" for="imageDest">Image :</label>
+                                <input class="form-control" type="file" id="imageDest" name="imageDest">
+                                <label class="form-text"> Choisir un format jpg, png, jpeg</label>
+                            </div>
 
-        <!-- SECTION CONTACT-->
-        <section id="contact" class="hidden">
-            <h1>Contact</h1>
-            <form method="post">
-                <p><label for="nom">Nom</label></p>
-                <input id="nom" type="text" name="nom" required />
+                            <div class="form-group">
+                                <label class="form-label" for="paysDest">Pays :</label>
+                                <input class="form-control" placehoder="EX : France" type="text" id="paysDest" name="paysDest" required>
+                            </div>
 
-                <p><label for="prenom">Prenom</label></p>
-                <input id="prenom" type="text" name="prenom" />
+                            <div class="form-group">
+                                <label class="form-label" for="tarifDest">Tarif :</label>
+                                <input class="form-control" type="number" id="tarifDest" name="tarifDest" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="circuitDest">Circuit :</label>
+                                <textarea class="form-control" placehoder="Expliquer le circuit" type="text" id="circuitDest" name="circuitDest" required></textarea>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="submit" class="ALeftToRight">Submit
+                                    <div class="absolute">
+                                        <hr>
+                                    </div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-centered modal-scrollable fade" id="ContactUsModal" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Contact Us</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- NOTE DESTINATION FORM -->
+                        <div id="ContactForm" class="container">
+                            <form method="post">
+                                <div class="form-group">
+                                    <label class="form-label" for="nom">Nom</label>
+                                    <input class="form-control" id="nom" type="text" name="nom" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="prenom">Prenom</label>
+                                    <input class="form-control" id="prenom" type="text" name="prenom" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input class="form-control" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="phonenumber">Numero de telehpone</label>
+                                    <input class="form-control" id="phonenumber" placeholder="Format : 07 07 07 07 07" type="tel"
+                                        pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="phonenumber" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="msg">Message</label>
+                                    <textarea class="form-control" id="msg" name="msg" required></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="ALeftToRight">Submit
+                                        <div class="absolute">
+                                            <hr>
+                                        </div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal modal-centered modal-scrollable fade" id="LoginModal" tabindex="-1"
+            aria-labelledby="LoginModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Connection</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- NOTE DESTINATION FORM -->
+                        <div id="ContactForm" class="container">
+                            <form onsubmit="connection(this,event)" data-modal='LoginModal'>
+                                <div class="form-group">
+                                    <label class="form-label" for="login">Pseudo</label>
+                                    <input class="form-control" id="login" type="text" name="login" required />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="password">Mot de passe</label>
+                                    <input class="form-control" id="password" type="password" name="password" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="ALeftToRight">Submit
+                                        <div class="absolute">
+                                            <hr>
+                                        </div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <p><label for="email">Email</label></p>
-                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+        <div id="toast" class="toast" role="toast" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header flex justify-content-space-between">
+                <strong class="mr-auto" id="toast-title">Bootstrap</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" id="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+        
 
-                <p><label for="phonenumber">Numero de telehpone</label></p>
-                <input id="phonenumber" type="tel" pattern="[0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}" name="phonenumber" required />
-                <small>Format : 07 07 07 07 07</small>
-
-                <p><label for="msg">Message</label></p>
-                <textarea id="msg" name="msg"></textarea>
-
-                <input type="submit" value="Envoyer" />
-            </form>
-        </section>
     </body>
+    <script
+			  src="https://code.jquery.com/jquery-3.6.1.min.js"
+			  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+			  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    
     <script src="script/Destination.js"></script>
     <script src="script/script.js"></script>
 </html>

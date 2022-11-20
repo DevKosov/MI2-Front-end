@@ -8,9 +8,9 @@ viewBox="0 0 6.82666 6.82666"
   <style type="text/css">
    <![CDATA[
     .fil0 {fill:none}
-    .fil3 {fill:#f0ccd4}
-    .fil2 {fill:#f01a4d;fill-rule:nonzero}
-    .fil1 {fill:#ff003c;fill-rule:nonzero}
+    .fil3 {fill:#ccccf0}
+    .fil2 {fill:#171b3e;fill-rule:nonzero}
+    .fil1 {fill:#171b3e;}
    ]]>
   </style>
  </defs>

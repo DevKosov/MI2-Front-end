@@ -1,13 +1,14 @@
 class Destination {
     /**
      * Cree un objet Destination
+     * @param {int} pays : nom du pays
      * @param {string} pays : nom du pays
      * @param {string} photoURL : url du photo
      * @param {string} circuit : description du circuit
      * @param {int} tarif
      */
-    constructor(pays, photoURL, circuit, tarif) {
-        this.id = Destination.incrementId()
+    constructor(id, pays, photoURL, circuit, tarif) {
+        this.id = id
         this.pays = pays
         this.photoURL = photoURL ? photoURL : 'images/albania.jpg'
         this.circuit = circuit
@@ -21,6 +22,7 @@ class Destination {
     toJSON() {
         //convert to json
         return JSON.stringify({
+            id: this.id,
             pays: this.pays,
             photoURL: this.photoURL,
             circuit: this.circuit,
@@ -64,17 +66,17 @@ class Destination {
     }
 
     set tarif(value) {
-        this._tarif = value;
+        this._tarif = value
     }
     /**
-     * Static method. Auto increments ids for destinations 
+     * Static method. Auto increments ids for destinations
      * @returns Next auto incremented id for a destination
      */
-    static incrementId() {
-        if (!this._latestId) 
-            this._latestId = 1
-        else 
-            this._latestId++
-        return this._latestId
-    }
+    // static incrementId() {
+    //     if (!this._latestId)
+    //         this._latestId = 0
+    //     else
+    //         this._latestId++
+    //     return this._latestId
+    // }
 }

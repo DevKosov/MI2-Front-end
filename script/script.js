@@ -1,56 +1,81 @@
-//SECTION Navbar
-const navbar = document.getElementById('navbar')
-function activeNavbar(scrollpos) {
-    (scrollpos > 100)
-        ? navbar.classList.add('scrolling')
-        : navbar.classList.remove('scrolling')
+//List of initial destinations
+let destinations = []
+
+/**
+ * Lancee on load de window
+ */
+window.onload = async () => {
+    //Video autoplay
+    if (document.getElementById('mainvid')) document.getElementById('mainvid').play()
+
+    //Navbar
+    const navbarParent = document.getElementById('navbar-links')
+    const navbarLinks = navbarParent.querySelectorAll('a.ALeftToRight:not(.dropdown-link)')
+
+    navbarLinks.forEach((nav) => {
+        if (nav.dataset.section != 'contact') nav.addEventListener('click', () => switchViews(nav))
+    })
+    document.addEventListener('scroll', () => activeNavbar(window.scrollY))
+    //Init mobile bar
+    initMobileNavbar()
+
+    //Get destinations
+    destinations = await getDestinations();
+
+    // console.log(destinations);
+    // Display destinations
+    displayDestinations(destinations)
+
+    //TP 3 modify / add image on change
+    document.getElementById('imageDest').addEventListener('change', async () => {
+        let image = await readFile(document.getElementById('imageDest'))
+        document.getElementById('imagePreviewDest').style.background = 'url(' + image + ')'
+    })
 }
-document.addEventListener('scroll', () => activeNavbar(window.scrollY))
+
+//SECTION Navbar
+/**
+ * Ajoute un background sur le navbar en fonction de la scroll position d'ecran
+ * @param {int} scrollpos
+ */
+function activeNavbar(scrollpos) {
+    const navbar = document.getElementById('navbar')
+    scrollpos > 20 ? navbar.classList.add('scrolling') : navbar.classList.remove('scrolling')
+}
+
+/**
+ * Affiche le menu mobile
+ */
+function displayResponsiveMenu() {
+    let mobileNavbar = document.getElementById('mobileNavbar')
+    let body = document.body
+    if (mobileNavbar.classList.contains('hidden')) {
+        mobileNavbar.classList.remove('hidden')
+        body.style.overflow = 'hidden'
+    } else {
+        mobileNavbar.classList.add('hidden')
+        body.style.overflow = 'auto'
+    }
+}
+
+/**
+ * Initialise dynamiquement le menu responsive
+ */
+function initMobileNavbar() {
+    let navbar = document.getElementById('navbar')
+    let mobileNavbarLinks = document.getElementById('mobileNavbarLinks')
+    let links = navbar.querySelectorAll('.ALeftToRight')
+    links.forEach((nav) => {
+        let p = nav.cloneNode(true)
+        p.addEventListener('click', () => {
+            switchViews(p)
+        })
+        if (p.dataset.section) mobileNavbarLinks.appendChild(p)
+    })
+}
 //!SECTION
 
-
-//TP 4
-// async function getDestinations() {
-//     const destinations = [];
-//     const destinationsJSON = await fetch('./script/destinations.json')
-//         .then((response) => response.json())
-
-//     destinationsJSON.forEach(destination => {
-//         destinations.push(new Destination(destination.pays,destination.photoURL,destination.circuit,destination.tarif));
-//     });
-//     return destinations;
-// }
-
 //SECTION TP 3
-
-//List of initial destinations
-let destinations = [
-    new Destination(
-        'Kosovo',
-        'images/albania.jpg',
-        'Circuits de 8 jours / 7 nuits au départ de Paris le 17 avr. 2023',
-        9000
-    ),
-    new Destination(
-        'Albania',
-        'images/albania.jpg',
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vero nesciunt amet tempora illo adipisci ut fuga aspernatur quibusdam est.',
-        6000
-    ),
-    new Destination(
-        'France',
-        'images/albania.jpg',
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vero nesciunt amet tempora illo adipisci ut fuga aspernatur quibusdam est.',
-        15000
-    ),
-    new Destination(
-        'Turkey',
-        'images/albania.jpg',
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vero nesciunt amet tempora illo adipisci ut fuga aspernatur quibusdam est.',
-        9000
-    )
-]
-
 //SECTION TP3 Affichage de menu en single page
 
 /**
@@ -58,14 +83,18 @@ let destinations = [
  * @param {Element} nav navigateur clicked
  */
 function switchViews(nav) {
-    if (nav.dataset.section != 'accueil')
-        document.getElementById('navbar').classList.add('scrolling');
-    else
-        document.getElementById('navbar').classList.remove('scrolling')
-    //Remove display of last activated nav 
-    let lastActiveNav = navbarParent.querySelector('a.active')
-    lastActiveNav.classList.remove('active')
+    // Get the last active nav
+    let lastActiveMobileNav = document.querySelector('#mobileNavbarLinks>a.active')
+    let lastActiveNavParent = nav.closest('#navbar-links')
+
+    if (lastActiveNavParent) {
+        let lastActiveNav = lastActiveNavParent.querySelector('a.active')
+        lastActiveNav.classList.remove('active')
+    }
+    //Remove display of last activated nav
+    lastActiveMobileNav.classList.remove('active')
     //add display to the newly selected nav
+    document.querySelector(`#mobileNavbarLinks>[data-section='${nav.dataset.section}']`).classList.add('active')
     nav.classList.add('active')
 
     //Close the old section
@@ -76,14 +105,14 @@ function switchViews(nav) {
     let openSection = document.getElementById(nav.dataset.section)
     openSection.classList.remove('hidden')
     openSection.classList.add('active')
+
+    //Close mobile menu
+    document.getElementById('mobileNavbar').classList.add('hidden')
+    // Hamburger animation on switch
+    document.getElementById('hamburger').checked = false
+    // body overflow auto
+    document.body.style.overflow = 'auto'
 }
-
-const navbarParent = document.getElementById('navbar-links');
-const navbarLinks = navbarParent.querySelectorAll('a.ALeftToRight:not(.dropdown-link)')
-
-navbarLinks.forEach((nav) => {
-    nav.addEventListener('click', () => switchViews(nav));
-})
 
 //!SECTION
 
@@ -101,27 +130,61 @@ function displayDestinations(destinations) {
                 currency: 'EUR',
             }).format(destination.tarif)
 
+            // is image BASE64?
+            let imageBASE64 = destination.photoURL.includes('data:image')
+
+            // Check if is admin | user
+            let admin = isAdmin()
+            let user = isUser()
+
+            if (admin) 
+                document.getElementById('addImage').classList.remove('hidden')
+            else 
+                document.getElementById('addImage').classList.add('hidden')
+
+            let decouvrir = `
+                <span class="trashcan" onclick="cardZoom('destination${destination.id}')">
+                    <img width="30px"src="images/decouvrir.svg" alt="decouvrir">
+                </span>
+                `
+            let controls = `
+                            <span class="trashcan" onclick="removeDestination(${destination.id})">
+                                <img width="30px"src="images/remove.svg" alt="remove">
+                            </span>
+                            <span onclick="destinationFormState(${destination.id},'modify')">
+                                <img width="30px" src="images/edit.svg" alt="edit">
+                            </span>
+                            ${decouvrir}
+                            `
 
             destinationTable.innerHTML += `
-			<tr id="destination${destination.id}">
-				<td><img src="${destination.photoURL}" alt="${destination.pays}"></td>
-				<td class="pays">${destination.pays}</td>
-				<td class="circuit">${destination.circuit}</td>
-				<td class="tarif">${tarifFormated}</td>
-				<td class="reserver">
-					<button class="ALeftToRight "> 
-					Reserver 
-					<div class='absolute'><hr/></div>
-					</button>
-                    <span class="trashcan" onclick="removeDestination(${destination.id})"><img src="images/remove.svg"></span>
-                    <span class="edit" onclick="destinationFormState(${destination.id},'modify')"><img src="images/edit.svg"></span>
-				</td>
-			</tr>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 no-padding" id="destination${destination.id}">
+                    <div class="card flex flexColumn justify-content-space-between">
+                        <div class="card-top">
+                            <div class="card-header flex align-items-center">
+                                <h3>${destination.pays}</h3>
+                                <div class="card-controls">
+                                    ${admin ? controls : user ? decouvrir : ``}
+                                </div>
+                            </div>
+                            <div class="card-image-parent">
+                                <div style="background-image:url('${!imageBASE64 ? '../' : ''}${destination.photoURL}')" class="card-image"></div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p>${destination.circuit}</p>
+                            <div class="reserver flex align-items-center justify-content-space-between margin-top-10px">
+                                <p>${tarifFormated}</p>
+                                <button class="ALeftToRight">Reserver 
+                                    <div class='absolute'><hr/></div>
+                                </button>
+                            </div>   
+                        </div>                 
+                    </div>
 			`
         })
     }
 }
-
 
 // SECTION Modifier Ajouter des destinations
 
@@ -130,127 +193,148 @@ function displayDestinations(destinations) {
  * @param {int} id de destination
  * @param {string} action l'etat de form (add/modify)
  */
-function destinationFormState(id,action) {
+function destinationFormState(id, action) {
+    //Declaration du form et reinitialisation
+    let paysDest = document.getElementById('paysDest')
+    let idDest = document.getElementById('idDest')
+    let imageDest = document.getElementById('imageDest')
+    let circuitDest = document.getElementById('circuitDest')
+    let tarifDest = document.getElementById('tarifDest')
+    let imagePreview = document.getElementById('imagePreviewDest')
+    let form = document.getElementById('destinationForm')
+    let destinationFormModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('destinationFormModal'))
 
-    //Declaration du form et reinitialisation 
-    let paysDest = document.getElementById('paysDest');
-    let idDest = document.getElementById('idDest');
-    let imageDest = document.getElementById('imageDest');
-    let circuitDest = document.getElementById('circuitDest');
-    let tarifDest = document.getElementById('tarifDest');
-    let imagePreview = document.getElementById('imagePreviewDest');
-    let form = document.getElementById('destinationForm');
-    
     // Reinit all values
-    paysDest.value = '';
-    imagePreview.setAttribute('src','');
-    idDest.value = '';
-    imageDest.value = '';
-    circuitDest.value = '';
-    tarifDest.value = '';    
-    
+    paysDest.value = ''
+    imagePreview.style.background = ''
+    idDest.value = ''
+    imageDest.value = ''
+    circuitDest.value = ''
+    tarifDest.value = ''
+
     // Si l'action est d'ajouter une nouvelle destination
-    if (action == 'add'){
-        // Afficher le form
-        form.classList.remove('hidden');
-        let title = form.querySelector('h3')
+    if (action == 'add') {
+        let title = document.getElementById('modalFormTitle')
         title.innerHTML = 'Ajouter une destination'
-        form.addEventListener('submit',(e) => addDestination(e),{once: true});
-    }else{ // Sinon c'est l'action modifier
-        let editDestination;
-        destinations.forEach(dest => {
-            if (dest.id == id){
-                editDestination = dest;
+        form.addEventListener('submit', (e) => addDestination(e), { once: true })
+    } else {
+        // Ouvrir le modal
+        destinationFormModal.show()
+        // Sinon c'est l'action modifier
+        let editDestination
+        destinations.forEach((dest) => {
+            if (dest.id == id) {
+                editDestination = dest
             }
-        });
-        form.classList.remove('hidden');
-        let title = form.querySelector('h3');
-        title.innerHTML = "Modifier la destination";
-        imagePreview.setAttribute('src', editDestination.photoURL);
+        })
+        let title = document.getElementById('modalFormTitle')
+        title.innerHTML = 'Modifier la destination'
+        imagePreview.style.background = 'url(' + editDestination.photoURL + ')'
+        paysDest.value = editDestination.pays
+        idDest.value = editDestination.id
+        circuitDest.value = editDestination.circuit
+        tarifDest.value = parseInt(editDestination.tarif)
 
-        paysDest.value = editDestination.pays;
-        idDest.value = editDestination.id;
-        circuitDest.value = editDestination.circuit;
-        tarifDest.value = parseInt(editDestination.tarif);
-        console.log(editDestination);
-
-        form.addEventListener('submit', (e) => modifyDestination(e),{once: true});
+        form.addEventListener('submit', (e) => modifyDestination(e), { once: true })
     }
-
 }
 /**
- * Insere une nouvelle destination sur le variable destinations 
+ * Insere une nouvelle destination sur le variable destinations
  * puis met a jour l'affichage de la liste
  * @param {event} e l'event de destination
  */
 async function addDestination(e) {
-    e.preventDefault();
+    e.preventDefault()
     // inputs
-    let image = document.getElementById('imageDest');
-    let circuit = document.getElementById('circuitDest').value;
-    let tarif = document.getElementById('tarifDest').value;
-    let pays = document.getElementById('paysDest').value;
-    
+    let image = document.getElementById('imageDest')
+    let circuit = document.getElementById('circuitDest').value
+    let tarif = document.getElementById('tarifDest').value
+    let pays = document.getElementById('paysDest').value
+
     // Lire l'image
-    image = await readFile(image);
-    
+    image = await readFile(image)
+
+    //increment the id
+    let id = destinations.length;
+
     //Ajouter sur la liste
-    destinations.push(new Destination(pays, image, circuit, parseInt(tarif)));
-    
+    let newDestination = new Destination(id,pays, image, circuit, parseInt(tarif))
+    destinations.push(newDestination)
+
+    // Preparer le requette ajax
+    let post = {
+        action: 'updateOrAdd',
+        data:newDestination.toJSON(),
+    }
+    console.log(post);
+
+    // Lancer la requette ajax
+    await $.ajax({
+        url: './data/persistance.php',
+        type: 'POST',
+        data: post,
+        success: function (data) {
+            console.log(JSON.parse(data));
+        },
+    })
+
     // Mettre a jour l'affichage et enlever le form
-    displayDestinations(destinations);
-    document.getElementById('destinationForm').classList.add('hidden');
+    displayDestinations(destinations)
+    // Fermer le form
+    let destinationFormModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('destinationFormModal'))
+    destinationFormModal.hide()
 }
 
 /**
  * Modifie la destination choisie
- * @param {event} e 
+ * @param {event} e
  */
 async function modifyDestination(e) {
-    e.preventDefault();
+    e.preventDefault()
     // inputs
-    let idDest = document.getElementById('idDest').value;
+    let idDest = document.getElementById('idDest').value
     let image = document.getElementById('imageDest')
     let circuit = document.getElementById('circuitDest').value
     let tarif = document.getElementById('tarifDest').value
     let pays = document.getElementById('paysDest').value
 
     // Trouver la destination sur la liste des destinations
-    let destPos = destinations.map((x)=> {return x.id; }).indexOf(parseInt(idDest));
+    let destPos = destinations
+        .map((x) => {
+            return x.id
+        })
+        .indexOf(parseInt(idDest))
 
     // Modifier les informaions de la destination trouvee
     destinations[destPos].circuit = circuit
-    destinations[destPos].tarif = parseInt(tarif);
+    destinations[destPos].tarif = parseInt(tarif)
     destinations[destPos].pays = pays
-    if (image.files[0]){
+    if (image.files[0]) {
         image = await readFile(image)
         destinations[destPos].photoURL = image
     }
+    
+    let post = {
+        action: 'updateOrAdd',
+        data: destinations[destPos].toJSON(),
+    }
+
+    await $.ajax({
+        url: './data/persistance.php',
+        type: 'POST',
+        data: post,
+        success: function (data) {
+            destinationsJSON = JSON.parse(data)
+        },
+    })
+
 
     //Mettre a jour l'affichage
     displayDestinations(destinations)
     // Fermer le form
-    document.getElementById('destinationForm').classList.add('hidden')
-
+    let destinationFormModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('destinationFormModal'))
+    destinationFormModal.hide()
 }
-
-// /**
-//  * 
-//  * @param {string} url 
-//  * @returns 
-//  */
-// async function toDataURL(url) {
-//     return fetch(url)
-//     .then((response) => response.blob())
-//     .then((blob) =>
-//             new Promise((resolve, reject) => {
-//                 const reader = new FileReader()
-//                 reader.onloadend = () => resolve(reader.result)
-//                 reader.onerror = reject
-//                 reader.readAsDataURL(blob)
-//             })
-//     )
-// }
 
 /**
  * Lire l'image inserer
@@ -277,39 +361,132 @@ async function readFile(input) {
  * Supprime la destination avec l'id {id} puis reinitialise l'affichage de la liste
  * @param {int} id id of destination to remove
  */
-function removeDestination(id) {
+async function removeDestination(id) {
+    let destToRemoveId = '';
     destinations.forEach((destination) => {
         if (destination.id == id) {
+            destToRemoveId = destination.id;
             destinations = destinations.filter((dest) => dest.id != id)
         }
     })
+
+    let post = {
+        action: 'delete',
+        data: destToRemoveId,
+    }
+
+    await $.ajax({
+        url: './data/persistance.php',
+        type: 'POST',
+        data: post,
+        success: function (data) {
+            destinationsJSON = JSON.parse(data)
+        },
+    })
+
     displayDestinations(destinations)
 }
 //!SECTION
 //!SECTION
 
+//SECTION TP 4
+
 /**
- * Lancee on load de window
+ * Requette ajax qui fait une tentative de connection
+ * Affiche un toast en fonction de la reponse ajax
+ * Change l'affichage des destinations en fonction s'il est admin, utilisateur ou pas,
+ * @param {HTMLElement} form Le login form
+ * @param {Event} e Event
  */
-window.onload = async () => {
-    //Video autoplay
-    if (document.getElementById('mainvid'))
-        document.getElementById('mainvid').play();
+async function connection(form, e) {
+    e.preventDefault()
+    let login = document.getElementById('login').value
+    let password = document.getElementById('password').value
 
-    // TP 3:
-    // Display destinations
-    displayDestinations(destinations);
+    let formData = { login: login, password: password }
 
-    //TP 3 modify / add image on change
-    document.getElementById('imageDest').addEventListener('change',async ()=>{
-        let image = await readFile(document.getElementById('imageDest'));
-        document.getElementById('imagePreviewDest').setAttribute('src', image);
-    });
+    $.ajax({
+        url: './data/connection.php',
+        type: 'POST',
+        data: formData,
+        success: function (data, textStatus, jqXHR) {
+            if (data == 'Success' && formData.login == 'admin') {
+                sessionStorage.setItem('user', 'admin')
+                showToast('Connection', 'Connection Reussi. Bienvenue Admin!')
+            } else if (data == 'Success' && formData.login == 'user') {
+                showToast('Connection', 'Connection Reussi. Bienvenue Normal User!')
+                sessionStorage.setItem('user', 'normal')
+            } else {
+                showToast('Connection', 'Echec de Connection!')
+                sessionStorage.removeItem('user')
+            }
+            //remove the modal
+            let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById(form.dataset.modal))
+            modal.hide()
+            //Redisplay
+            displayDestinations(destinations)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {},
+    })
+}
+/**
+ * Retourne Vrai si l'utilisateur est un admin Faux sinon
+ * @returns boolean
+ */
+function isAdmin() {
+    return sessionStorage.getItem('user') == 'admin'
+}
+/**
+ * Retourne Vrai si l'utilisateur est connectee Faux sinon
+ * @returns boolean
+ */
+function isUser() {
+    return sessionStorage.getItem('user') ? true : false
+}
 
-    //TP 4:
-    //List of initial destinations
-    // const destinations = await getDestinations()
-    //Display destinations
-    // console.log(destinations);
-    // displayDestinations(destinations);
+/**
+ * Affiche un toast avec le titre est le message donnee
+ * @param {string} title Titre de toast
+ * @param {string} message Message du toast
+ */
+function showToast(title, message) {
+    document.getElementById('toast-body').innerHTML = message
+    document.getElementById('toast-title').innerHTML = title
+    new bootstrap.Toast(document.getElementById('toast'), { animation: true, autohide: true, delay: 3000 }).show()
+}
+
+async function getDestinations() {
+
+    let destinations = [];
+    let destinationsJSON;
+
+    let post = {action:'read'}
+
+    await $.ajax({
+        url: './data/persistance.php',
+        type: 'POST',
+        data: post,
+        success: function (data) {
+            destinationsJSON = JSON.parse(data)
+        },
+    })
+
+    destinationsJSON.forEach((destination) => {
+        destinations.push(new Destination(destination.id,destination.pays, destination.photoURL, destination.circuit, destination.tarif))
+    })
+    return destinations
+}
+
+/**
+ * Ajoute l'effet de zoom sur une card 
+ * @param {string} cardId 
+ */
+function cardZoom(cardId) {
+    console.log(cardId);
+    let card = document.getElementById(cardId).querySelector('.card');
+    card.classList.add('zoomed');
+
+    card.addEventListener('mouseleave', () => {
+            card.classList.remove('zoomed')
+        },{ once: true });
 }
